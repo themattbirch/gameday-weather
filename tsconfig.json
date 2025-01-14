@@ -2,17 +2,17 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",  // Changed from commonjs for better tree shaking
+    "module": "esnext",  
     "moduleResolution": "node",
-    "jsx": "react-jsx",  // Updated for newer React
-    "baseUrl": "src",    // Added for cleaner imports
+    "jsx": "react-jsx", 
+    "baseUrl": "src",    
     "outDir": "./dist",
     "rootDir": "/",
     
     // Build options
     "allowJs": true,
     "sourceMap": true,
-    "declaration": false,  // Changed since it's a frontend app
+    "declaration": false,  
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -33,7 +33,7 @@
   "include": [
     "src/**/*",
     "src/**/*.json",
-    "public/**/*.json"  // Added to handle manifest.json
+    "public/**/*.json"  
   ],
   "exclude": [
     "node_modules",

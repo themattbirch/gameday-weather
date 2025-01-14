@@ -1,5 +1,3 @@
-// settings.js
-
 class SettingsManager {
   constructor() {
     this.modal = null;
@@ -14,8 +12,8 @@ class SettingsManager {
       display: {
         showTrends: true,
         showAlerts: true,
-        temperature: 'F', // or 'C'
-        refreshInterval: 30, // minutes
+        temperature: 'F',
+        refreshInterval: 30, 
       },
     };
     this.loadSettings();
@@ -129,6 +127,3 @@ class SettingsManager {
     window.dispatchEvent(new Event('settingsChanged'));
   }
 }
-
-// Export the class if using modules
-// export default SettingsManager;

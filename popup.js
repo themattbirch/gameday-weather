@@ -450,7 +450,8 @@ function enhancedFetchWeather(stadium) {
         latitude: stadium.latitude,
         longitude: stadium.longitude,
       },
-      (response) => {
+      async (response) => {
+        // Make this callback async
         if (chrome.runtime.lastError) {
           console.error("Message error:", chrome.runtime.lastError);
           handleFetchError("Communication error with background script");
@@ -472,7 +473,7 @@ function enhancedFetchWeather(stadium) {
         }
 
         hideLoadingIndicator();
-        displayWeather(response, stadium);
+        await displayWeather(response, stadium); // Await the display
       }
     );
   }
@@ -501,7 +502,7 @@ function enhancedFetchWeather(stadium) {
   attemptFetch();
 }
 
-function displayWeather(weatherData, stadium) {
+async function displayWeather(weatherData, stadium) {
   if (!weatherData || !weatherData.weather || !weatherData.main) {
     showErrorMessage("Incomplete weather data.");
     return;
@@ -511,12 +512,12 @@ function displayWeather(weatherData, stadium) {
   if (!weatherList) return;
 
   weatherList.innerHTML = "";
-  const weatherCard = createWeatherCard(weatherData, stadium);
+  const weatherCard = await createWeatherCard(weatherData, stadium);
   weatherList.appendChild(weatherCard);
   weatherList.style.display = "flex";
 }
 
-function createWeatherCard(weatherData, stadium) {
+async function createWeatherCard(weatherData, stadium) {
   const card = document.createElement("div");
   card.className = "game-card";
 
@@ -526,39 +527,35 @@ function createWeatherCard(weatherData, stadium) {
   const humidity = weatherData.main ? weatherData.main.humidity : "N/A";
   let feelsLike = weatherData.main ? weatherData.main.feels_like : "N/A";
   let temp = weatherData.main ? weatherData.main.temp : "N/A";
-  const weatherDescription =
-    weatherData.weather && weatherData.weather[0]
-      ? weatherData.weather[0].description
-      : "";
+
+  // Extract weather icon and description
   const weatherIcon =
     weatherData.weather && weatherData.weather[0]
       ? weatherData.weather[0].icon
       : "";
+  const weatherDescription =
+    weatherData.weather && weatherData.weather[0]
+      ? weatherData.weather[0].description
+      : "";
 
-  // Get temperature unit preference from SettingsManager
-  const settings = SettingsManager.getAll();
+  // Get temperature unit preference
+  const settings = await SettingsManager.getAll();
   console.log("🌡️ Temperature settings:", settings);
   const temperatureUnit = settings.temperatureUnit;
 
-  // Convert temperatures if unit is Celsius
   let tempUnit = "°F";
   if (temperatureUnit === "C" && temp !== "N/A" && feelsLike !== "N/A") {
-    // Ensure we're working with numbers
     temp = parseFloat(temp);
     feelsLike = parseFloat(feelsLike);
-    console.log("🔄 Converting to Celsius from:", { temp, feelsLike });
-
-    // Convert Fahrenheit to Celsius
     temp = (((temp - 32) * 5) / 9).toFixed(1);
     feelsLike = (((feelsLike - 32) * 5) / 9).toFixed(1);
     tempUnit = "°C";
-    console.log("✅ Converted to Celsius:", { temp, feelsLike });
   } else if (temp !== "N/A" && feelsLike !== "N/A") {
-    // Still format Fahrenheit temperatures
     temp = parseFloat(temp).toFixed(1);
     feelsLike = parseFloat(feelsLike).toFixed(1);
   }
 
+  // use weatherIcon and weatherDescription in the template
   card.innerHTML = `
     <div class="weather-icon-container">
       ${
@@ -601,29 +598,28 @@ function createWeatherCard(weatherData, stadium) {
 }
 
 // Include offline detection logic in popup.js
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   if (!navigator.onLine) {
-    const offlineMessage = document.getElementById('offlineMessage');
+    const offlineMessage = document.getElementById("offlineMessage");
     if (offlineMessage) {
-      offlineMessage.style.display = 'block';
+      offlineMessage.style.display = "block";
     }
   }
 
-  window.addEventListener('online', () => {
-    const offlineMessage = document.getElementById('offlineMessage');
+  window.addEventListener("online", () => {
+    const offlineMessage = document.getElementById("offlineMessage");
     if (offlineMessage) {
-      offlineMessage.style.display = 'none';
+      offlineMessage.style.display = "none";
     }
   });
 
-  window.addEventListener('offline', () => {
-    const offlineMessage = document.getElementById('offlineMessage');
+  window.addEventListener("offline", () => {
+    const offlineMessage = document.getElementById("offlineMessage");
     if (offlineMessage) {
-      offlineMessage.style.display = 'block';
+      offlineMessage.style.display = "block";
     }
   });
 });
-
 
 function showSettings() {
   console.log("⚙️ Opening settings");
@@ -710,7 +706,7 @@ function createSettingsModal() {
     </div>
     <div class="settings-footer">
         <div class="privacy-policy-container">
-            <a href="https://stadiumweather.app/privacy.html" target="_blank" class="privacy-link">
+            <a href="https://gameday-weather.vercel.app/privacy" target="_blank" class="privacy-link">
                 Privacy Policy
             </a>
         </div>

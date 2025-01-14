@@ -2,12 +2,8 @@
 
 /**
  * Inlined by dotenv-webpack at build time.
- * Make sure your .env is properly set up so this variable is replaced
- * with the real API key string in the final /dist/background.js.
  */
 const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
-
-console.log("API Key:", OPENWEATHER_API_KEY);
 
 /**
  * Store the API key locally when the extension is installed/updated.
@@ -39,7 +35,7 @@ async function fetchWeather(lat, lon) {
 
     // Construct the OpenWeather API URL
     const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
-    const url = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const url = `${baseUrl}?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
     console.log("🌍 Fetching weather from OpenWeather:", url);
 
     // Hit the API
@@ -69,7 +65,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     fetchWeather(request.latitude, request.longitude)
       .then((data) => sendResponse(data))
       .catch((error) => sendResponse({ error: error.message }));
-    return true; // Keep the message channel open for async response
+    return true; 
   }
 });
 

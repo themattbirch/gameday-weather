@@ -41,7 +41,6 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new Dotenv({ path: "./.env" }),
-      console.log(process.env),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         filename: "popup.html",
