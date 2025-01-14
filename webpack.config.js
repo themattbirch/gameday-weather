@@ -44,12 +44,6 @@ module.exports = (env, argv) => {
       new Dotenv({
         path: "./.env",
         systemvars: true,
-        safe: false, // Set to false if you don't have a .env.example
-      }),
-      new webpack.DefinePlugin({
-        "process.env.OPENWEATHER_API_KEY": JSON.stringify(
-          process.env.OPENWEATHER_API_KEY
-        ),
       }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
