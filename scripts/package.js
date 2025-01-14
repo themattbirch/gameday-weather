@@ -20,7 +20,9 @@ async function packageExtension() {
     // Copy scripts
     await fs.copy('background.js', path.join(DIST_DIR, 'background.js'));
     await fs.copy('popup.js', path.join(DIST_DIR, 'popup.js'));
-    await fs.copy('offlineDetection.js', path.join(DIST_DIR, 'offlineDetection.js')); // Existing script
+    await fs.copy('offlineDetection.js', path.join(DIST_DIR, 'offlineDetection.js'));
+    await fs.copy('serviceworker.js', path.join(DIST_DIR, 'serviceworker.js'));
+// Existing script
 
     // Copy data directory
     await fs.copy('./src/data', path.join(DIST_DIR, 'data'));
