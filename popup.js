@@ -12,31 +12,23 @@ const SettingsManager = {
     cacheExpiry: 3600000,
   },
 
-  
-
   async init() {
     console.log("🔧 Initializing SettingsManager");
     await this.migrateOldSettings();
     await this.validateSettings();
-    const settings = await this.getAll();
-    console.log("📊 Initial settings:", settings);
-    return settings;
+    return await this.getAll();
   },
 
   async migrateOldSettings() {
     try {
-      // Get settings from chrome.storage.local
-      const result = await chrome.storage.local.get(['settings']);
+      const result = await chrome.storage.local.get(["settings"]);
       const oldSettings = result.settings || {};
-      console.log("🔄 Found old settings:", oldSettings);
-
-      const settings = await this.getAll();
       if (Object.keys(oldSettings).length > 0) {
-        await this.saveAll({ ...settings, ...oldSettings });
+        await this.saveAll({ ...this.defaults, ...oldSettings });
         console.log("✅ Settings migrated successfully");
       }
     } catch (error) {
-      console.error("Settings migration failed:", error);
+      console.error("❌ Settings migration failed:", error);
     }
   },
 
@@ -58,10 +50,10 @@ const SettingsManager = {
 
   async getAll() {
     try {
-      const result = await chrome.storage.local.get(['settings']);
+      const result = await chrome.storage.local.get(["settings"]);
       return result.settings || { ...this.defaults };
     } catch (error) {
-      console.error("Error reading settings:", error);
+      console.error("❌ Error reading settings:", error);
       return { ...this.defaults };
     }
   },
@@ -69,13 +61,11 @@ const SettingsManager = {
   async saveAll(settings) {
     try {
       await chrome.storage.local.set({ settings });
-      console.log("💾 Saved settings:", settings);
-      return true;
+      console.log("💾 Settings saved:", settings);
     } catch (error) {
-      console.error("Error saving settings:", error);
-      return false;
+      console.error("❌ Error saving settings:", error);
     }
-  }
+  },
 };
 
 // Main Initialization
@@ -609,6 +599,31 @@ function createWeatherCard(weatherData, stadium) {
 
   return card;
 }
+
+// Include offline detection logic in popup.js
+document.addEventListener('DOMContentLoaded', () => {
+  if (!navigator.onLine) {
+    const offlineMessage = document.getElementById('offlineMessage');
+    if (offlineMessage) {
+      offlineMessage.style.display = 'block';
+    }
+  }
+
+  window.addEventListener('online', () => {
+    const offlineMessage = document.getElementById('offlineMessage');
+    if (offlineMessage) {
+      offlineMessage.style.display = 'none';
+    }
+  });
+
+  window.addEventListener('offline', () => {
+    const offlineMessage = document.getElementById('offlineMessage');
+    if (offlineMessage) {
+      offlineMessage.style.display = 'block';
+    }
+  });
+});
+
 
 function showSettings() {
   console.log("⚙️ Opening settings");

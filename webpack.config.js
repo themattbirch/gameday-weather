@@ -1,6 +1,5 @@
-const webpack = require("webpack");
-const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -41,10 +40,7 @@ module.exports = (env, argv) => {
       extensions: [".tsx", ".ts", ".js", ".jsx"],
     },
     plugins: [
-      new Dotenv({
-        path: "./.env",
-        systemvars: true,
-      }),
+      new Dotenv({ path: "./.env", systemvars: true }), 
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         filename: "popup.html",
@@ -53,6 +49,7 @@ module.exports = (env, argv) => {
       new CopyPlugin({
         patterns: [
           { from: "./serviceworker.js", to: "serviceworker.js" },
+          { from: "./offlineDetection.js", to: "offlineDetection.js" },
           { from: "public/manifest.json", to: "manifest.json" },
           { from: "src/data", to: "data", noErrorOnMissing: true },
           { from: "public/icons", to: "icons" },

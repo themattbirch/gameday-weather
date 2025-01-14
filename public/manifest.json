@@ -27,7 +27,8 @@
       "resources": [
         "data/*",
         "icons/*",
-        "styles.css"
+        "styles.css",
+        "serviceworker.js"
       ],
       "matches": [
         "<all_urls>"
