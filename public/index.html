@@ -12,35 +12,7 @@
 </head>
 
 <body>
-<script>
-    // Mock Chrome APIs must be defined before popup.js loads
-    console.log("Setting up environment...");
 
-    if (typeof chrome === 'undefined') {
-            window.chrome = {
-                storage: {
-                    local: {
-                        get: async (key) => {
-                            console.log('Mock storage.get called with:', key);
-                            return { settings: null }; // Return a default object
-                        },
-                        set: async (data) => {
-                            console.log('Mock storage.set called with:', data);
-                            return;
-                        }
-                    }
-                },
-                runtime: {
-                    getURL: (path) => {
-                        console.log('Mock getURL called with:', path);
-                        return `http://localhost:8080${path}`;
-                    },
-                    lastError: null
-                }
-        };
-        console.log("Chrome APIs mocked for development");
-    }
-</script>
     <div class="container">
         <!-- Header Section -->
         <header class="header">
@@ -116,21 +88,3 @@
             <p>&copy; 2024 Optimize Web Solutions</p>
         </footer>
     </div>
-<!-- Debug log at the end -->
-<script>
-    console.log("Environment check:", {
-        hasChrome: !!window.chrome,
-        hasRuntime: !!(window.chrome && chrome.runtime),
-        hasStorage: !!(window.chrome && chrome.storage),
-        apis: {
-            storage: chrome?.storage,
-            runtime: chrome?.runtime
-        }
-    });
-</script>
-
-<!-- Finally load popup.js -->
-<script src="popup.js"></script>
-</body>
-
-</html>

@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -44,6 +45,11 @@ module.exports = (env, argv) => {
         path: "./.env",
         systemvars: true,
         safe: false, // Set to false if you don't have a .env.example
+      }),
+      new webpack.DefinePlugin({
+        "process.env.OPENWEATHER_API_KEY": JSON.stringify(
+          process.env.OPENWEATHER_API_KEY
+        ),
       }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",

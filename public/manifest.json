@@ -39,5 +39,8 @@
     "48": "icons/football48.png",
     "128": "icons/football128.png"
   },
-  "offline_enabled": true
+  "offline_enabled": true,
+  "content_security_policy": {
+  "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.openweathermap.org https://gameday-weather.vercel.app/"
+}
 }
