@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Stadium Weather - Chrome Extension</title>
+    <meta name="description"
+        content="Get real-time weather updates for NFL and NCAA stadiums. Perfect for fans, travelers, and tailgaters!">
+    <link rel="icon" href="/icons/icon16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/icons/icon32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/icons/icon192.png" sizes="192x192" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-sky-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <i data-lucide="cloud-sun" class="w-8 h-8 text-sky-600 dark:text-sky-400"></i>
+                    <span class="ml-2 font-bold text-gray-900 dark:text-white">Football Stadium Weather</span>
+                </div>
+                <div>
+                    <a href="https://chromewebstore.google.com/detail/football-stadium-weather/foglniidjfhhchgemahaigkmjpfephmg?authuser=0&hl=en"
+                        class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition-colors">
+                        Add to Chrome
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Never Miss a Weather Update at Your Stadium
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+                Get real-time weather updates for NFL and NCAA stadiums. Perfect for fans, travelers, and tailgaters!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://chromewebstore.google.com/detail/football-stadium-weather/foglniidjfhhchgemahaigkmjpfephmg?authuser=0&hl=en"
+                    class="bg-sky-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-sky-700 transition-colors">
+                    Install Now
+                </a>
+                <a href="#features"
+                    class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                Key Features
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Real-time Updates -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="refresh-cw" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Real-time Updates</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Get instant weather updates for any NFL or NCAA stadium,
+                        keeping you informed for game day.</p>
+                </div>
+
+                <!-- Dark Mode -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="moon" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Dark Mode</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Easy on your eyes with automatic dark mode support based
+                        on your system preferences.</p>
+                </div>
+
+                <!-- Offline Support -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="wifi-off" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Offline Support</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Access last-viewed weather data even without an internet
+                        connection.</p>
+                </div>
+
+                <!-- Temperature Options -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="thermometer" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Temperature Options</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Switch between Fahrenheit (°F) and Celsius (°C) to match
+                        your preference.</p>
+                </div>
+
+                <!-- Quick Search -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="search" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Quick Search</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Easily find your favorite team or stadium using
+                        intuitive dropdown menus.</p>
+                </div>
+
+                <!-- Game Day Ready -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="calendar" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Game Day Ready</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Plan your game day experience with confidence using
+                        accurate weather data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 bg-sky-600">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">
+                Ready for Game Day?
+            </h2>
+            <p class="text-sky-100 mb-8 max-w-2xl mx-auto">
+                Join thousands of football fans who trust Football Stadium Weather for their game day planning.
+            </p>
+            <a href="https://chrome.google.com/webstore"
+                class="bg-white text-sky-600 px-8 py-4 rounded-lg text-lg font-medium hover:bg-sky-50 transition-colors inline-block">
+                Add to Chrome
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-gray-50 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-600 dark:text-gray-400">
+                © 2025 Optimize Web Solutions. All rights reserved.
+            </p>
+            <div class="mt-4 space-x-4">
+                <a href="/privacy" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                    Privacy Policy
+                </a>
+                <a href="/support" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                    Support
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Handle dark mode
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+
+</html>

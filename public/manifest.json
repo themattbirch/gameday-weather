@@ -7,9 +7,11 @@
   "permissions": [
     "storage"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "host_permissions": [
-   "https://api.openweathermap.org/*",
-    "https://gameday-weather.vercel.app/*"
+   "https://api.openweathermap.org/*"
   ],
   "action": {
     "default_popup": "popup.html", 
@@ -18,9 +20,6 @@
       "48": "icons/football48.png",
       "128": "icons/football128.png"
     }
-  },
-  "background": {
-    "service_worker": "background.js"
   },
   "web_accessible_resources": [
     {

@@ -1,10 +1,17 @@
-const CACHE_NAME = "gameday-weather-v1";
-const SERVER_URL = "https://gameday-weather.vercel.app";
+// background.js (Manifest V3 service worker)
+
+/**
+ * Inlined by dotenv-webpack at build time.
+ * Make sure your .env is properly set up so this variable is replaced
+ * with the real API key string in the final /dist/background.js.
+ */
 const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
 console.log("API Key:", OPENWEATHER_API_KEY);
 
-// Install event handlers and message listeners
+/**
+ * Store the API key locally when the extension is installed/updated.
+ */
 chrome.runtime.onInstalled.addListener(async () => {
   try {
     await chrome.storage.local.set({ OPENWEATHER_API_KEY });
@@ -15,23 +22,27 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 /**
- * Fetches weather data from the server API.
- * @param {number} lat - Latitude of the location.
- * @param {number} lon - Longitude of the location.
- * @returns {Promise<Object>} - The weather data.
+ * Fetches weather data directly from OpenWeather.
+ * @param {number} lat  Latitude
+ * @param {number} lon  Longitude
+ * @returns {Promise<Object>} Weather data
  */
 async function fetchWeather(lat, lon) {
   try {
-    const result = await chrome.storage.local.get(["OPENWEATHER_API_KEY"]);
-    const apiKey = result.OPENWEATHER_API_KEY;
-
+    // Read the API key from chrome.storage (in case it was updated)
+    const { OPENWEATHER_API_KEY: apiKey } = await chrome.storage.local.get([
+      "OPENWEATHER_API_KEY",
+    ]);
     if (!apiKey) {
       throw new Error("API key not found");
     }
 
-    const url = `${SERVER_URL}/api/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-    console.log("🌍 Fetching weather from server:", url);
+    // Construct the OpenWeather API URL
+    const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
+    const url = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    console.log("🌍 Fetching weather from OpenWeather:", url);
 
+    // Hit the API
     const response = await fetch(url);
     console.log("📡 Server Response Status:", response.status);
 
@@ -39,6 +50,7 @@ async function fetchWeather(lat, lon) {
       throw new Error(`Weather API error: ${response.status}`);
     }
 
+    // Parse & return JSON data
     const data = await response.json();
     console.log("📦 Weather Data:", data);
     return data;
@@ -48,15 +60,20 @@ async function fetchWeather(lat, lon) {
   }
 }
 
-// Message handler
+/**
+ * Handle messages from popup.js (or content scripts).
+ * If `request.type === "GET_WEATHER"`, we call fetchWeather.
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "GET_WEATHER") {
     fetchWeather(request.latitude, request.longitude)
       .then((data) => sendResponse(data))
       .catch((error) => sendResponse({ error: error.message }));
-    return true; // Indicate asynchronous response
+    return true; // Keep the message channel open for async response
   }
 });
 
-// Log service worker initialization
+/**
+ * Manifest V3 background script (service worker) initialization log
+ */
 console.log("🚀 Service Worker is active and running.");
