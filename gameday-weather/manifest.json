@@ -4,13 +4,13 @@
   "version": "1.1.5",
   "version_name": "1.1.5 - API update",
   "description": "Get updated weather information for NFL and college football (NCAAF) stadiums. Features temperature unit toggle & offline support.",
-  "homepage_url": "football-weather-chrome.vercel.app",
+  "homepage_url": "gameday-weather.vercel.app",
   "permissions": [
     "storage"
   ],
   "host_permissions": [
    "https://api.openweathermap.org/*",
-    "https://football-weather-chrome.vercel.app*"
+    "gameday-weather.vercel.app*"
   ],
   "action": {
     "default_popup": "popup.html", 

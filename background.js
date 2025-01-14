@@ -1,5 +1,5 @@
 const CACHE_NAME = "gameday-weather-v1";
-const SERVER_URL = "https://football-weather-chrome.vercel.app";
+const SERVER_URL = "https://gameday-weather.vercel.app";
 const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
 // Install event handlers and message listeners

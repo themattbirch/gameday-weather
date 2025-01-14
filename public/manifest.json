@@ -9,7 +9,7 @@
   ],
   "host_permissions": [
    "https://api.openweathermap.org/*",
-    "https://football-weather-chrome.vercel.app*"
+    "https://gameday-weather.vercel.app*"
   ],
   "action": {
     "default_popup": "popup.html", 
