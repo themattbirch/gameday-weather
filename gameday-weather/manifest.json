@@ -9,7 +9,7 @@
   ],
   "host_permissions": [
    "https://api.openweathermap.org/*",
-    "https://gameday-weather.vercel.app*"
+    "https://gameday-weather.vercel.app/*"
   ],
   "action": {
     "default_popup": "popup.html", 
@@ -41,6 +41,6 @@
   },
   "offline_enabled": true,
   "content_security_policy": {
-  "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.openweathermap.org https://gameday-weather.vercel.app/"
+  "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.openweathermap.org https://gameday-weather.vercel.app"
 }
 }

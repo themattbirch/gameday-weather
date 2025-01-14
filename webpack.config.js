@@ -52,6 +52,7 @@ module.exports = (env, argv) => {
       }),
       new CopyPlugin({
         patterns: [
+          { from: "./serviceworker.js", to: "serviceworker.js" },
           { from: "public/manifest.json", to: "manifest.json" },
           { from: "src/data", to: "data", noErrorOnMissing: true },
           { from: "public/icons", to: "icons" },

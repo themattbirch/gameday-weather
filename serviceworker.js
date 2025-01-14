@@ -1,18 +1,24 @@
 // serviceworker.js
 const CACHE_NAME = 'gameday-weather-v1';
 
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
+  console.log("Service Worker: Installed");
   event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.addAll([
-        'styles.css',
-        'popup.js',
-        'data/stadium_coordinates.json'
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Service Worker: Caching files");
+      return cache.addAll([
+        "styles.css",
+        "popup.js",
+        "data/stadium_coordinates.json",
       ]);
-    })()
+    })
   );
 });
+
+self.addEventListener("activate", (event) => {
+  console.log("Service Worker: Activated");
+});
+
 
 self.addEventListener('fetch', (event) => {
   if (event.request.url.includes('api.openweathermap.org')) {
