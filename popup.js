@@ -528,7 +528,7 @@ async function createWeatherCard(weatherData, stadium) {
   let feelsLike = weatherData.main ? weatherData.main.feels_like : "N/A";
   let temp = weatherData.main ? weatherData.main.temp : "N/A";
 
-  // Extract weather icon & description
+  // Extract weather icon + description
   const weatherIcon =
     weatherData.weather && weatherData.weather[0]
       ? weatherData.weather[0].icon
